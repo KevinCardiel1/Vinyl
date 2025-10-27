@@ -94,10 +94,13 @@ body {
 .dropdown-content a {
     color: #fff;
     font-size: 12px;
+    display: block;
+    width: 100%;
 }
 
-/* Mostrar menú al pasar */
-.dropdown:hover .dropdown-content {
+/* Mostrar menú al pasar o cuando está activo */
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content {
     display: block;
 }
 
@@ -131,13 +134,48 @@ body {
     color: #ffd6f5;
 }
 
-/* Grid de novedades */
 .novedades-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 18px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
 }
+
+.novedad-card {
+    position: relative;
+    background: #fff0fa; 
+    border-radius: 12px;
+    overflow: hidden;
+    height: 250px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.novedad-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.novedad-card:hover {
+    transform: scale(1.03);
+}
+
+.novedad-overlay {
+    position: relative;
+    background: rgba(255,102,204,0.8); 
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1;
+}
+
 
 .modal { display: none; }
 .modal {
@@ -176,6 +214,8 @@ body {
     border-radius: 4px;
     margin-bottom: 10px;
 }
+
+
 
 .modal-close {
     position: absolute;

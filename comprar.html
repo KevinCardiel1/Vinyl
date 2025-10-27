@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comprar - AXOLOTL MUSIC</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body.comprar-page {
+            background: #ffdff3;
+            color: #2b0030;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .comprar-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff0fa;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .artist-frame {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            border: 4px solid #c51a8d;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .artist-frame img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ff66cc;
+            margin-bottom: 15px;
+        }
+
+        .artist-frame h2 {
+            color: #c51a8d;
+            font-size: 36px;
+            text-align: center;
+            margin: 0;
+            text-shadow: 0 0 5px #ffc7f2;
+        }
+
+        .category-title {
+            font-size: 26px;
+            color: #2b0030;
+            text-align: left;
+            margin: 30px 0 10px 10px;
+            border-left: 6px solid #c51a8d;
+            padding-left: 10px;
+        }
+
+        .comprar-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .comprar-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+
+        .comprar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+
+        .comprar-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .comprar-card h3 {
+            color: #c51a8d;
+            font-size: 18px;
+            margin: 12px;
+        }
+
+        .price {
+            text-align: center;
+            color: #2b0030;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .buy-btn {
+            background: linear-gradient(90deg, #5a005a, #c51a8d);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(90deg, #7a007a, #ff4db8);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #5a005a, #c51a8d);
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: linear-gradient(90deg, #7a007a, #ff4db8);
+        }
+
+        @media (max-width:600px){
+            .artist-frame img { width: 150px; height: 150px; }
+            .artist-frame h2 { font-size: 28px; }
+            .comprar-card img { height: 200px; }
+        }
+    </style>
+</head>
+<body class="comprar-page">
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="vinyl.png" alt="Logo AXOLOTL MUSIC">
+                <h1 style="margin: 0; font-size: 13px; line-height: 14px; color: #ff66cc; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">
+                    AXOLOTL<br>MUSIC
+                </h1>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="artistas.html">ARTISTAS</a></li>
+            <li class="dropdown">
+                <a href="#">GÉNEROS ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="genero.html">Pop</a></li>
+                    <li><a href="genero.html">K-Pop</a></li>
+                    <li><a href="genero.html">J-Pop</a></li>
+                    <li><a href="genero.html">Rock</a></li>
+                    <li><a href="genero.html">Latina</a></li>
+                </ul>
+            </li>
+            <li><a href="novedades.html">NOVEDADES</a></li>
+            <li class="dropdown">
+                <a href="#">MÚSICA ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Vinilos</a></li>
+                    <li><a href="#">CDs</a></li>
+                    <li><a href="#">Casetes</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="comprar-container">
+        <div class="artist-frame">
+            <img id="artist-photo" src="default_artist.jpg" alt="Artista">
+            <h2 id="artist-name">Artista</h2>
+        </div>
+
+        <div id="product-sections"></div>
+
+        <div style="text-align:center;">
+            <a href="artistas.html" class="back-link">← Volver a Artistas</a>
+        </div>
+    </section>
+</main>
+
+<script>
+const artistasData = {
+   "Ariana Grande": {
+    foto: "Ariana/super.png",
+    vinilos: [
+      { nombre: "Positions (Deluxe) (Vinilo)", img: "Ariana/position.png", precio: 950 },
+      { nombre: "My Everything (Vinilo)", img: "Ariana/myeverything.png", precio: 820 },
+      { nombre: "Sweetener (Vinilo)", img: "Ariana/sweetener.png", precio: 880 },
+      { nombre: "Eternal Sunshine (Vinilo)", img: "Ariana/eternal.png", precio: 970 },
+      { nombre: "Thank U, Next (Vinilo)", img: "Ariana/thankunext.png", precio: 900 }
+    ],
+    cds: [
+      { nombre: "Positions (Deluxe) (CD)", img: "Ariana/deluxe.png", precio: 430 },
+      { nombre: "Dangerous Woman (CD)", img: "Ariana/dangerous.png", precio: 390 }
+    ],
+    cassettes: [
+      { nombre: "Yes, and? (Cassette)", img: "Ariana/yesand.png", precio: 320 },
+      { nombre: "Positions (Cassette)", img: "Ariana/pos.png", precio: 330 }
+    ]
+  },
+
+  "Sabrina Carpenter": {
+    foto: "Sabrina/sabri.png",
+    vinilos: [
+      { nombre: "Short n’ Sweet (Vinilo)", img: "Sabrina/shortn.png", precio: 750 },
+      { nombre: "Espresso (Vinilo, Single)", img: "Sabrina/espresso.png", precio: 620 },
+      { nombre: "Mans Best Friend (Vinilo)", img: "Sabrina/mans.png", precio: 780 },
+      { nombre: "Tears (Vinilo, Single)", img: "Sabrina/tears.png", precio: 650 }
+    ],
+    cds: [
+      { nombre: "Emails I Can’t Send (CD)", img: "Sabrina/EICS.png", precio: 460 },
+      { nombre: "Short n’ Sweet (CD)", img: "Sabrina/shortnsweet.png", precio: 440 },
+      { nombre: "Man’s Best Friend (CD)", img: "Sabrina/mbf.png", precio: 420 }
+    ],
+    cassettes: [
+      { nombre: "Man’s Best Friend (Cassette)", img: "Sabrina/cassShort.png", precio: 290 },
+      { nombre: "Man’s Best Friend Alt (Cassette)", img: "Sabrina/casMans.png", precio: 310 }
+    ]
+  },
+
+  "Taylor Swift": {
+    foto: "Taylor/taylor.png",
+    vinilos: [
+      { nombre: "The Tortured Poets Department (Vinilo)", img: "Taylor/tortured.png", precio: 990 },
+      { nombre: "1989 (Vinilo)", img: "Taylor/t_s.png", precio: 870 },
+      { nombre: "Reputation (Vinilo)", img: "Taylor/reputation.png", precio: 830 },
+      { nombre: "Midnights (Vinilo)", img: "Taylor/midnights.png", precio: 920 }
+    ],
+    cds: [
+      { nombre: "1989 (Taylor’s Version) (CD)", img: "Taylor/1989.png", precio: 500 },
+      { nombre: "Red (Taylor’s Version) (CD)", img: "Taylor/red.png", precio: 480 },
+      { nombre: "Lover (CD)", img: "Taylor/lovercd.png", precio: 450 }
+    ],
+    cassettes: [
+      
+    ]
+  },
+
+  "Billie Eillish": {
+    foto: "Billie/eillish.png",
+    vinilos: [
+      { nombre: "Happier Than Ever (Vinilo)", img: "Billie/happier.png", precio: 860 },
+      { nombre: "Hit Me Hard And Soft (Vinilo)", img: "Billie/billie.png", precio: 790 },
+      { nombre: "What Was I Made For? (Vinilo, Single)", img: "Billie/MadeFor.png", precio: 670 },
+      { nombre: "When We All Fall Asleep… (Vinilo)", img: "Billie/OrangeBillie.png", precio: 880 }
+    ],
+    cds: [
+      { nombre: "Don’t Smile at Me (CD)", img: "Billie/dontsmilecd.png", precio: 430 },
+      { nombre: "When We All Fall Asleep… (CD)", img: "Billie/cd.png", precio: 460 }
+    ],
+    cassettes: [
+      { nombre: "Happier Than Ever (Cassette)", img: "Billie/happierthan.png", precio: 300 },
+      { nombre: "What Was I Made For? (Cassette)", img: "Billie/whatiwasimadefor.png", precio: 290 }
+    ]
+  },
+
+  "Britney Spears": {
+    foto: "Britney/omg.png", 
+    vinilos: [
+      { nombre: "Baby One More Time (Vinilo)", img: "Britney/babyonemoretime.png", precio: 800 },
+      { nombre: "Blackout (Vinilo)", img: "Britney/blackout.png", precio: 820 },
+      { nombre: "In The Zone (Vinilo)", img: "Britney/britney.png", precio: 790 },
+      { nombre: "Circus (Vinilo, Single)", img: "Britney/circus.png", precio: 640 }
+    ],
+    cds: [
+      { nombre: "…Baby One More Time (CD)", img: "Britney/babyonemoretimecd.png", precio: 420 },
+      { nombre: "Blackout (CD)", img: "Britney/blackcd.png", precio: 440 }
+    ],
+    cassettes: [
+      { nombre: "Circus(Cassette)", img: "Britney/circuscas.png", precio: 280 },
+      { nombre: "Oops!... I Did It Again (Cassette)", img: "Britney/oops.png", precio: 300 }
+    ]
+  }
+};
+
+// Mostrar artista y productos
+const params = new URLSearchParams(window.location.search);
+const artista = params.get("artista");
+const artistNameEl = document.getElementById("artist-name");
+const artistPhotoEl = document.getElementById("artist-photo");
+const productSections = document.getElementById("product-sections");
+
+if (artista && artistasData[artista]) {
+    const data = artistasData[artista];
+    artistNameEl.textContent = artista;
+    artistPhotoEl.src = data.foto;
+
+    const categorias = [
+        { key: "vinilos", titulo: "Vinilos" },
+        { key: "cds", titulo: "CDs" },
+        { key: "cassettes", titulo: "Cassettes" }
+    ];
+
+    categorias.forEach(cat => {
+        if (data[cat.key]) {
+            const section = document.createElement("div");
+            section.innerHTML = `<h3 class="category-title">${cat.titulo}</h3>`;
+            const grid = document.createElement("div");
+            grid.classList.add("comprar-sections");
+
+            data[cat.key].forEach(item => {
+                const card = document.createElement("div");
+                card.classList.add("comprar-card");
+                card.innerHTML = `
+                    <img src="${item.img}" alt="${item.nombre}">
+                    <h3>${item.nombre}</h3>
+                    <p class="price">MXN $${item.precio}</p>
+                    <a href="finalizar.html?artista=${encodeURIComponent(artista)}&producto=${encodeURIComponent(item.nombre)}&precio=${item.precio}" class="buy-btn">Comprar</a>
+                `;
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            productSections.appendChild(section);
+        }
+    });
+} else {
+    artistNameEl.textContent = "Artista no encontrado";
+}
+</script>
+</body>
+</html>

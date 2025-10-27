@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NOVEDADES - AXOLOTL MUSIC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="vinyl.png" alt="Logo AXOLOTL MUSIC">
+                <h1 style="margin: 0; font-size: 13px; line-height: 14px; color: #ff66cc; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">
+                    AXOLOTL<br>MUSIC
+                </h1>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="artistas.html">ARTISTAS</a></li>
+            <li class="dropdown">
+                <a href="">GÉNEROS ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="genero.html">Pop</a></li>
+                    <li><a href="genero.html">K-Pop</a></li>
+                    <li><a href="genero.html">J-Pop</a></li>
+                    <li><a href="genero.html">Rock</a></li>
+                    <li><a href="genero.html">Latina</a></li>
+                </ul>
+            </li>
+            <li><a href="novedades.html">NOVEDADES</a></li>
+            <li class="dropdown">
+                <a href="">MÚSICA ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Vinilos</a></li>
+                    <li><a href="#">CDs</a></li>
+                    <li><a href="#">Casetes</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+   <section class="novedades-section">
+        <h3 class="section-title">NOVEDADES</h3>
+        <div class="novedades-grid">
+            <div class="novedad-card" data-title="The Life of a Showgirl" data-desc="Vinilo edición limitada" data-img="taylor.png">
+                <img src="taylor.png" alt="The Life of a Showgirl">
+                <div class="novedad-overlay">NUEVO ALBUM DE TAYLOR SWIFT</div>
+            </div>
+            <div class="novedad-card" data-title="Mans Best Friend" data-desc="Vinilo edición limitada" data-img="omg.png">
+                <img src="omg.png" alt="Mans Best Friend">
+                <div class="novedad-overlay">NUEVO ALBUM DE SABRINA CARPENTER</div>
+            </div>
+            <div class="novedad-card" data-title="Tears" data-desc="Single digital" data-img="tears.png">
+                <img src="tears.png" alt="Tears">
+                <div class="novedad-overlay">NUEVO SINGLE DE SABRINA CARPENTER</div>
+            </div>
+            <div class="novedad-card" data-title="The Dead Dance" data-desc="Single digital" data-img="gaga.png">
+                <img src="gaga.png" alt="The Dead Dance">
+                <div class="novedad-overlay">NUEVO SINGLE DE LADY GAGA</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal -->
+<div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close">×</button>
+        <img id="modal-img" src="" alt="">
+        <h4 id="modal-title"></h4>
+        <p id="modal-desc"></p>
+    </div>
+</div>
+
+<script>
+// Manejo de dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const dropdownLink = dropdown.querySelector('a');
+        dropdownLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+            dropdown.classList.toggle('active');
+        });
+    });
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(d => d.classList.remove('active'));
+        }
+    });
+});
+
+// Abrir modal al hacer click en una tarjeta
+document.addEventListener('DOMContentLoaded', function(){
+    const cards = document.querySelectorAll('.novedad-card');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalClose = document.getElementById('modal-close');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+
+    function openModal(card){
+        const img = card.dataset.img || card.querySelector('img').src;
+        modalImg.src = img;
+        modalTitle.textContent = card.dataset.title || '';
+        modalDesc.textContent = card.dataset.desc || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    cards.forEach(c => c.addEventListener('click', () => openModal(c)));
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+});
+</script>
+
+</body>
+</html>
